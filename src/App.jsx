@@ -87,7 +87,20 @@ const App = () => {
     isLocal: false,
   });
 
-  
+  // Save recipe handler
+  const handleSaveRecipe = (recipe) => {
+    if (editingRecipe) {
+      const updated = localRecipes.map((r) =>
+        r.id === editingRecipe.id ? recipe : r
+      );
+      saveLocalRecipes(updated);
+    } else {
+      saveLocalRecipes([...localRecipes, recipe]);
+    }
+    setEditingRecipe(null);
+    setCurrentView("list");
+  };
+
   // Combine and filter recipes
   const allRecipes = [...localRecipes, ...apiRecipes.map(transformApiRecipe)];
 
