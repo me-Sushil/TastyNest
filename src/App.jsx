@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Search, Plus, ChefHat } from "lucide-react";
 
-const RecipeApp = () => {
+const App = () => {
   const [viewMode, setViewMode] = useState("list");
   const [apiData, setApiData] = useState([]);
   const [storedRecipes, setStoredRecipes] = useState([]);
@@ -19,7 +19,7 @@ const RecipeApp = () => {
   // Fetch recipes from API
   const API_BASE = import.meta.env.VITE_URL;
 
-  const getRecipes = async (searchTerm = "chicken") => {
+  const getRecipes = async (searchTerm = "") => {
     setIsLoading(true);
     try {
       const url = searchTerm ? `${API_BASE}${searchTerm}` : `${API_BASE}chicken`;
@@ -67,9 +67,9 @@ const RecipeApp = () => {
             <h1 className="text-2xl font-bold text-gray-800">TastyNest</h1>
           </div>
 
-          {viewMode === "list" && (
-            <div className="flex items-center gap-4">
-              <div className="relative">
+          {viewMode === "list" && ( 
+            <div className="flex flex-col md:flex-row gap-3 md:gap-4 ">
+              <div className="relative w-full md:w-64">
                 <Search
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                   size={20}
@@ -79,7 +79,7 @@ const RecipeApp = () => {
                   placeholder="Search recipes..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
                 />
               </div>
               <button
@@ -87,8 +87,7 @@ const RecipeApp = () => {
                   setActiveRecipe(null);
                   setViewMode("form");
                 }}
-                className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium transition-colors"
-              >
+                  className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium transition-colors w-full md:w-auto"              >
                 <Plus size={20} />
                 Add Recipe
               </button>
@@ -100,4 +99,4 @@ const RecipeApp = () => {
   );
 };
 
-export default RecipeApp;
+export default App;
