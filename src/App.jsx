@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Search, Plus, ChefHat } from "lucide-react";
-
+import service from "./services/service";
 const App = () => {
   const [viewMode, setViewMode] = useState("list");
   const [apiData, setApiData] = useState([]);
@@ -17,15 +17,13 @@ const App = () => {
   }, []);
 
   // Fetch recipes from API
-  const API_BASE = import.meta.env.VITE_URL;
 
   const getRecipes = async (searchTerm = "") => {
     setIsLoading(true);
     try {
-      const url = searchTerm ? `${API_BASE}${searchTerm}` : `${API_BASE}chicken`;
-      const res = await fetch(url);
-      const result = await res.json();
-      setApiData(result.meals || []);
+      const res = await service.getAll(searchTerm);
+      console.log(res.meals);
+      setApiData(res.meals || []);
     } catch (err) {
       console.error("Failed to fetch recipes:", err);
       setApiData([]);
