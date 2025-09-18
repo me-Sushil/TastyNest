@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Search, Plus, ChefHat } from "lucide-react";
 import RecipeCard from "./components/RecipeCard";
 import service from "./services/service";
+import RecipeDetails from "./components/RecipeDetails";
 
 const App = () => {
   const [currentView, setCurrentView] = useState("list");
@@ -86,7 +87,6 @@ const App = () => {
   });
 
   
-
   // Combine and filter recipes
   const allRecipes = [...localRecipes, ...apiRecipes.map(transformApiRecipe)];
 
@@ -219,7 +219,13 @@ const App = () => {
           </div>
         )}
 
-       
+        {currentView === "detail" && selectedRecipe && (
+          <RecipeDetails
+            recipe={selectedRecipe}
+            setCurrentView={setCurrentView}
+          />
+        )}
+
       
       </main>
     </div>
