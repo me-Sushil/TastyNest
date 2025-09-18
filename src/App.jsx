@@ -4,6 +4,7 @@ import { Search, Plus, ChefHat } from "lucide-react";
 import RecipeCard from "./components/RecipeCard";
 import service from "./services/service";
 import RecipeDetails from "./components/RecipeDetails";
+import RecipeForm from "./components/RecipeForm";
 
 const App = () => {
   const [currentView, setCurrentView] = useState("list");
@@ -86,7 +87,20 @@ const App = () => {
     isLocal: false,
   });
 
-  
+  // Save recipe handler
+  const handleSaveRecipe = (recipe) => {
+    if (editingRecipe) {
+      const updated = localRecipes.map((r) =>
+        r.id === editingRecipe.id ? recipe : r
+      );
+      saveLocalRecipes(updated);
+    } else {
+      saveLocalRecipes([...localRecipes, recipe]);
+    }
+    setEditingRecipe(null);
+    setCurrentView("list");
+  };
+
   // Combine and filter recipes
   const allRecipes = [...localRecipes, ...apiRecipes.map(transformApiRecipe)];
 
@@ -225,7 +239,16 @@ const App = () => {
             setCurrentView={setCurrentView}
           />
         )}
-
+ {currentView === "form" && (
+          <RecipeForm
+            recipe={editingRecipe}
+            onSave={handleSaveRecipe}
+            onCancel={() => {
+              setEditingRecipe(null);
+              setCurrentView("list");
+            }}
+          />
+        )}
       
       </main>
     </div>
