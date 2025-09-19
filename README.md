@@ -1,12 +1,48 @@
-# React + Vite
+🍲 TastyNest – Recipe Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TastyNest is a recipe management and discovery application where you can search recipes from an external API, save your own custom recipes, and manage them with ease.
+Think of it as your personal cooking assistant 👨‍🍳 – only less messy than your actual kitchen.
 
-Currently, two official plugins are available:
+✨ Features
+🔍 Search Recipes – Find recipes from TheMealDB API
+📝 Save Your Own Recipes – Store your family’s secret dishes locally (via LocalStorage)
+👀 View Details – Ingredients, instructions, categories & more in a clean UI
+✏️ Edit & Delete – Full CRUD for your personal recipes
+⚡ Debounced Search – Optimized searching experience
+📱 Responsive Design – Works smoothly across devices
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🛠️ Tech Stack
+Frontend: React + Vite
+Styling: Tailwind CSS
+Icons: Lucide React
+API: TheMealDB
+Storage: LocalStorage (for custom recipes)
 
-## Expanding the ESLint configuration
+🚀 Getting Started
+1. Clone the repository
+git clone https://github.com/me-Sushil/tastynest.git
+cd tastynest
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. Install dependencies
+npm install
+
+3. Set up environment variables
+Create a .env file in the root directory:
+VITE_URL=https://www.themealdb.com/api/json/v1/1/search.php?s=
+
+4. Run the app
+npm run dev
+
+
+Now visit 👉 http://localhost:5173
+
+📂 Project Structure
+src/
+│── components/
+│   ├── RecipeCard.jsx
+│   ├── RecipeDetails.jsx
+│   ├── RecipeForm.jsx
+│── services/
+│   └── service.js
+│── App.jsx
+│── main.jsx
